@@ -1,28 +1,27 @@
-<!DOCTYPE HTML>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Flatiron Task Lister</title>
-  <link rel="stylesheet" href="./style.css">
-</head>
-<body>
-  <div id="main-content">
-    <h1>Task Lister Lite™️</h1>
+document.addEventListener("DOMContentLoaded", () => {
 
-    <form id="create-task-form" action="" method="POST">
-      <label for="new-task-description">Task description:</label>
-      <input type="text" id="new-task-description" name="new-task-description" placeholder="description">
-      <input type="submit" value="Create New Task">
-    </form>
+  const newTaskForm = document.getElementById("create-task-form");
+  const newTaskDescription = document.getElementById("new-task-description");
+  const newTaskPriority = document.getElementById("new-task-priority");
 
-    <div id="list">
-      <h2>My Todos:</h2>
-      <ul id="tasks">
-      </ul>
-    </div>
 
-    <script src="./src/index.js"></script>
-  </div>
+  const newTaskUl = document.getElementById("tasks");
 
-</body>
-</html>
+
+  newTaskForm.addEventListener("submit", createNewTask);
+});
+
+const createNewTask = event => {
+  event.preventDefault();
+
+  const newTaskDescription = document.getElementById("new-task-description");
+  const newTask = document.createElement("li");
+  newTask.innerText = newTaskDescription.value;
+
+  appendNewTask(newTask);
+  event.target.reset();
+};
+
+const appendNewTask = task => {
+  document.getElementById("tasks").appendChild(task);
+};
